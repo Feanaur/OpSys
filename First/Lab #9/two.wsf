@@ -1,0 +1,25 @@
+<?XML version="1.0" standalone="yes"?>
+<package>
+	<job id="one">
+		<runtime>
+			<description> задание1 </description>
+		</runtime>
+		<script language="JScript">
+			<![CDATA[
+			var wsh, id, path, s;
+			wsh = WScript.CreateObject("WScript.Shell");
+			id = wsh.RegRead("HKEY_CURRENT_USER\\Identities\\Default User ID");
+			path = wsh.RegRead("HKEY_CURRENT_USER\\Volatile Environment\\HOMEDRIVE");
+			lang = wsh.RegRead("HKEY_USERS\\.DEFAULT\\Keyboard Layout\\Preload\\1");
+			s = "Path to homedrive: "+path+"\n";
+			s += "ID: "+id+"\n";
+			s += "Language: "
+			home = wsh.RegRead("HKEY_CURRENT_USER\\Volatile Environment\\USERPROFILE");
+			if (lang == 419) s += "Russian\n";
+			if (lang == 409) s += "English\n";
+			s += "Home: "+home+"\n";
+			WScript.Echo(s);
+			]]>
+		</script>
+	</job>
+</package>

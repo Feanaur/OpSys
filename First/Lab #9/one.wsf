@@ -1,0 +1,39 @@
+<?XML version="1.0" standalone="yes"?>
+<package>
+	<job id="one">
+		<runtime>
+			<description> Task number one. </description>
+		</runtime>
+		<script language="VBScript">
+			<![CDATA[
+			Function InputFileName
+			InputFileName = InputBox("Input file name:", "!")
+			End Function
+			]]>
+		</script>
+		<script language="JScript">
+			<![CDATA[
+			var s, fso, file;
+			s = InputFileName();
+			fso = WScript.CreateObject("Scripting.FileSystemObject");
+			if(fso.FileExists(s))
+			{
+				file = fso.GetFile(s);
+				var f;
+				f = file.Attributes & 32;
+				if(f == 32)
+				{
+					WScript.Echo("File is archive");
+					file.Attributes -= 32; 
+				}
+				else
+				{
+					WScript.Echo("File is not archive");
+					file.Attributes += 32;
+				}
+			}
+			else WScript.Echo("File is not exists");
+			]]>
+		</script>
+	</job>
+</package>
